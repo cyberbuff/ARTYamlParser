@@ -13,16 +13,17 @@ namespace ARTYamlParser
                 .Build();
             var fileReader = File.OpenText("test.yaml");
             var yamlObject = deserializer.Deserialize(fileReader);
-            
-            // Converting to JSON as YamlDotNet can convert YAML either to a class or none. 
+
+            // YamlDotNet can convert YAML either to a class or none. 
             // Converting to class needs all the variables to be defined. 
+            // Hence converting to JSON.
             var serializer = new SerializerBuilder()
                 .JsonCompatible()
                 .Build();
 
             var json = serializer.Serialize(yamlObject);
             dynamic aTechnique = JToken.Parse(json);
-            Console.WriteLine(aTechnique.atomic_tests[0].executor.command);        
+            Console.WriteLine(aTechnique.atomic_tests[0].executor.command);
         }
     }
 }
